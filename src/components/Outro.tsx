@@ -26,7 +26,9 @@ export default function Outro() {
   const reduce = useReducedMotion()
   const closeRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: closeRef, offset: ['start 80%', 'end end'] })
-  const veil = useTransform(scrollYProgress, [0, 1], [0, 1])
+  // Only a partial darkening: the backdrop's Earth is the closing image,
+  // and a solid veil would cover the very thing this screen is for.
+  const veil = useTransform(scrollYProgress, [0, 1], [0, 0.45])
 
   return (
     <>

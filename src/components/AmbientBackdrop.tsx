@@ -20,6 +20,8 @@ import { ORIGIN } from './GeoMap'
  *   • Phones get stars only. No WebGL, no imagery download.
  */
 
+const lerp = (a: number, b: number, t: number) => +(a + (b - a) * t).toFixed(2)
+
 interface Star {
   x: number
   y: number
@@ -134,6 +136,8 @@ export default function AmbientBackdrop() {
   // the content is dense and a planet behind a card grid just fights the text,
   // so its presence is tied to scroll position rather than left at full weight.
   const [earthOpacity, setEarthOpacity] = useState(0.5)
+  /** 0 = corner horizon, 1 = centred in frame for the final screen. */
+  const [closing, setClosing] = useState(0)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -149,23 +153,28 @@ export default function AmbientBackdrop() {
   }, [])
 
   useEffect(() => {
-    let raf = 0
+    // Throttled on a clock, not on requestAnimationFrame: a rAF guard never
+    // clears while the page is not being rendered, which would leave the globe
+    // stuck wherever it was when rendering stopped.
+    let last = 0
     const onScroll = () => {
-      if (raf) return
-      raf = requestAnimationFrame(() => {
-        raf = 0
-        const max = document.documentElement.scrollHeight - window.innerHeight
-        const p = max > 0 ? window.scrollY / max : 0
-        const opening = 1 - Math.min(p / 0.14, 1) // strong for the first screens
-        const closing = Math.max(0, (p - 0.86) / 0.14) // returns for the outro
-        setEarthOpacity(0.06 + opening * 0.4 + closing * 0.34)
-      })
+      const now = performance.now()
+      if (now - last < 80) return
+      last = now
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const p = max > 0 ? window.scrollY / max : 0
+      const opening = 1 - Math.min(p / 0.14, 1) // strong for the first screens
+      // The last stretch of the page: the globe leaves the corner, moves to
+      // the centre of frame and settles as a whole planet — the retreat.
+      const close = Math.max(0, Math.min(1, (p - 0.84) / 0.16))
+      const eased = close * close * (3 - 2 * close)
+      setClosing(eased)
+      setEarthOpacity(0.06 + opening * 0.4 + eased * 0.5)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
     return () => {
-      cancelAnimationFrame(raf)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
@@ -187,8 +196,12 @@ export default function AmbientBackdrop() {
       {/* Earth, held at the bottom-right corner like a horizon. */}
       {globe && (
         <div
-          className="absolute -right-[22vw] -bottom-[48vh] h-[128vh] w-[128vh] [mask-image:radial-gradient(58%_58%_at_44%_36%,#000_34%,transparent_72%)]"
+          className="absolute top-1/2 left-1/2 h-[128vh] w-[128vh]"
           style={{
+            // Corner horizon for the whole page, centred for the closing.
+            transform: `translate(-50%, -50%) translate(calc((72vw - 64vh) * ${(1 - closing).toFixed(3)}), calc(34vh * ${(1 - closing).toFixed(3)})) scale(${(1 - closing * 0.5).toFixed(3)})`,
+            // The mask opens up as it centres, so the whole planet reads at the end.
+            maskImage: `radial-gradient(${lerp(58, 72, closing)}% ${lerp(58, 72, closing)}% at ${lerp(44, 50, closing)}% ${lerp(36, 50, closing)}%, #000 ${lerp(34, 60, closing)}%, transparent ${lerp(72, 86, closing)}%)`,
             opacity: earthOpacity,
             filter: 'saturate(0.85) brightness(0.9)',
             transition: 'opacity 260ms linear',
