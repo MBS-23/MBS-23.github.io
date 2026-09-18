@@ -1,15 +1,94 @@
+import {
+  Activity,
+  BarChart3,
+  Binary,
+  Boxes,
+  Bug,
+  Cloud,
+  Code2,
+  DatabaseZap,
+  FileSearch,
+  FlaskConical,
+  Globe,
+  HardDrive,
+  Network,
+  Radar,
+  Regex,
+  ScanEye,
+  ScanText,
+  Share2,
+  ShieldAlert,
+  ShieldCheck,
+  Siren,
+  Smartphone,
+  Sparkles,
+  SquareTerminal,
+  Waypoints,
+  type LucideIcon,
+} from 'lucide-react'
 import { toolIcon } from '../data/toolIcons'
+import { iconKey } from '../data/toolIcons'
 import { ENERGY } from './ui'
 import type { Energy } from '../data/skills'
 
 /**
- * A tool is shown by its own mark where a licensed one exists (simple-icons,
- * CC0) and by a typographic monogram where it does not — so the grid reads as
- * one designed system rather than a half-complete logo wall.
+ * Every tool gets a real icon, in this order:
  *
- * Marks are monochrome by default and take the discipline colour only when the
- * row is active, which keeps colour meaning what it means everywhere else.
+ *   1. the tool's own mark, where a CC0-licensed one exists (simple-icons)
+ *   2. a Lucide glyph describing what the tool DOES
+ *   3. a typographic monogram
+ *
+ * Step 2 exists because several tools here — Nmap, sqlmap, Wazuh, Sentinel,
+ * YARA, MISP, Autopsy, VS Code — have no freely licensed mark, and inventing
+ * a logo for somebody else's product would be a fake trademark. A precise
+ * function glyph is honest and reads better at 16px than a wrong logo.
  */
+
+const GLYPH: Record<string, LucideIcon> = {
+  // offensive / recon
+  nmap: Radar,
+  zenmap: Radar,
+  sqlmap: DatabaseZap,
+  maltego: Waypoints,
+  shodan: Globe,
+  tcpdump: Network,
+  nessus: ShieldAlert,
+  acunetix: ShieldAlert,
+
+  // defensive / SOC
+  wazuh: ShieldCheck,
+  microsoftsentinel: ScanEye,
+  snort: Siren,
+  sysmon: Activity,
+  yara: Regex,
+  loki: FileSearch,
+  misp: Share2,
+
+  // forensics
+  autopsy: HardDrive,
+  ftkimager: HardDrive,
+  cellebrite: Smartphone,
+  oxygenforensics: Smartphone,
+  cyberchef: FlaskConical,
+
+  // lab targets
+  dvwa: Bug,
+  mutillidae: Bug,
+  metasploitable2: Bug,
+
+  // engineering / AI-assisted
+  vscode: Code2,
+  claudecode: SquareTerminal,
+  antigravity: Sparkles,
+  powershell: SquareTerminal,
+  easyocr: ScanText,
+  powerbi: BarChart3,
+  microsoftazure: Cloud,
+  oraclecloud: Cloud,
+  virtualboxvmware: Boxes,
+  restapis: Network,
+  datastructuresalgorithms: Binary,
+}
 
 /** ORACLE → ORACLE, "Burp Suite" → BS, ReportLab → RL, YARA → YARA. */
 export function monogram(name: string): string {
@@ -35,7 +114,7 @@ export function ToolIcon({
   name: string
   size?: number
   className?: string
-  /** Monogram to use when no licensed mark exists for this tool. */
+  /** Monogram to use when neither a mark nor a glyph exists. */
   fallback?: string
 }) {
   const icon = toolIcon(name)
@@ -54,6 +133,11 @@ export function ToolIcon({
         <path d={icon.d} />
       </svg>
     )
+  }
+
+  const Glyph = GLYPH[iconKey(name)]
+  if (Glyph) {
+    return <Glyph size={size} strokeWidth={1.6} aria-hidden className={`shrink-0 ${className}`} />
   }
 
   return (

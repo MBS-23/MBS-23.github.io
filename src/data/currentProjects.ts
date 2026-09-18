@@ -46,6 +46,39 @@ export interface CurrentProject {
 
 export const currentProjects: CurrentProject[] = [
   {
+    id: 'logids2',
+    number: '00',
+    title: 'Log-Based IDS / IPS — extension',
+    subtitle: 'Continuing the internship prototype',
+    pillar: 'Defensive Security',
+    badge: 'IN PROGRESS',
+    stage: 'DEVELOPMENT',
+    column: 'building',
+    energy: 'safe',
+    objective:
+      'The internship version detects and alerts. This is the work of making it usable by an analyst: broader rule coverage, real correlation, and a triage view that says what to do next.',
+    flow: [
+      'LOG INGESTION',
+      'NORMALIZATION',
+      'DETECTION RULES',
+      'CORRELATION',
+      'RISK SCORING',
+      'ALERT',
+      'TRIAGE VIEW',
+      'RESPONSE ACTION',
+    ],
+    stack: ['Python', 'Splunk', 'SIEM correlation', 'Log parsing', 'Alerting'],
+    scope: [
+      'Started from the delivered Supraja internship project, which is listed under completed work',
+      'Extending detection beyond SQL injection, XSS, brute force, IDOR and credential stuffing',
+      'Adding correlation so related events become one incident rather than five alerts',
+      'An analyst view that carries the evidence and the decision, not just the event',
+    ],
+    nextMilestone: 'Correlation layer over the existing rule set, then the triage view.',
+    guardrail: 'Lab environment only. Detection and alerting — no automated blocking of production traffic.',
+    priority: 2,
+  },
+  {
     id: 'shadowportx2',
     number: '01',
     title: 'ShadowPortX 2.0',

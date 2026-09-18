@@ -190,7 +190,7 @@ export default function ResumeVault() {
               <button
                 type="button"
                 onClick={() => setOpen(masterResume)}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-fg px-6 py-3.5 font-mono text-[0.68rem] tracking-[0.14em] uppercase text-void transition-opacity hover:opacity-90"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-fg px-6 py-3.5 font-mono text-[0.68rem] tracking-[0.14em] uppercase text-bg transition-opacity hover:opacity-90"
               >
                 <Eye size={14} aria-hidden /> View master résumé
               </button>

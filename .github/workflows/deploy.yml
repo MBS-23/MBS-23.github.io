@@ -40,6 +40,11 @@ jobs:
       - name: Audit links and anchors
         run: node scripts/audit-links.mjs
 
+      # Tailwind drops a utility that names a token which does not exist, so a
+      # typo renders as no colour at all — white text on a white button.
+      - name: Audit colour tokens
+        run: node scripts/audit-tokens.mjs
+
       - run: npm run build
 
       # enablement turns Pages on for the repository on the first run, so there

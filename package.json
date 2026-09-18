@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "audit": "node scripts/audit-links.mjs && node scripts/audit-tokens.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",

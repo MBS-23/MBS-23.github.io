@@ -144,6 +144,7 @@ export const tools: ToolItem[] = [
   { name: 'Maltego', glyph: 'MG', energy: 'cyber', category: 'OSINT' },
   { name: 'Shodan', glyph: 'SH', energy: 'cyber', category: 'OSINT' },
   { name: 'Metasploit', glyph: 'MS', energy: 'cyber', category: 'Exploitation' },
+  { name: 'sqlmap', glyph: 'SQM', energy: 'cyber', category: 'Web Security' },
   { name: 'Wireshark', glyph: 'WS', energy: 'cyber', category: 'Network Analysis' },
   { name: 'tcpdump', glyph: 'TD', energy: 'cyber', category: 'Network Analysis' },
   { name: 'Nessus', glyph: 'NS', energy: 'cyber', category: 'Vulnerability Scanning' },
@@ -189,7 +190,10 @@ export const tools: ToolItem[] = [
   { name: 'PowerShell', glyph: 'PWS', energy: 'prompt', category: 'Scripting' },
   { name: 'Postman', glyph: 'PM', energy: 'prompt', category: 'API Testing' },
   { name: 'Claude', glyph: 'CL', energy: 'prompt', category: 'AI-Assisted Dev' },
+  { name: 'Claude Code', glyph: 'CC', energy: 'prompt', category: 'AI-Assisted Dev' },
   { name: 'ChatGPT', glyph: 'GPT', energy: 'prompt', category: 'AI-Assisted Dev' },
+  { name: 'GitHub Copilot', glyph: 'CP', energy: 'prompt', category: 'AI-Assisted Dev' },
+  { name: 'Antigravity', glyph: 'AG', energy: 'prompt', category: 'AI-Assisted Dev' },
   { name: 'Canva', glyph: 'CV2', energy: 'prompt', category: 'Design' },
 ]
 
