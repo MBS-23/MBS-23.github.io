@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------------------
+#  ALLOWLIST, not a denylist.
+#
+#  This project folder also holds résumés, tailored application copies, job
+#  search data and application history. None of that may ever reach a public
+#  repository, so git ignores everything by default and only the files listed
+#  below are tracked. Add a new top-level path here deliberately or it stays
+#  private.
+# ---------------------------------------------------------------------------
+
+/*
+
+!/.gitignore
+!/.github/
+!/README.md
+!/LICENSE
+!/index.html
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/tsconfig.app.json
+!/tsconfig.node.json
+!/vite.config.ts
+!/public/
+!/src/
+!/scripts/
+
+# Never, under any circumstances
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
+__pycache__/

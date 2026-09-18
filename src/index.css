@@ -1,0 +1,216 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   BALA VEERA VENKATA SUNIL — DESIGN SYSTEM
+   Matte black stage. White typography. Five semantic accents that identify
+   systems rather than decorate pages. Glow is a signal, not a style.
+   ========================================================================== */
+@theme {
+  /* Stage */
+  --color-bg: #050608;
+  --color-surface: #070a0d;
+  --color-surface-2: #0a0f13;
+
+  /* Ink */
+  --color-fg: #ffffff;
+  --color-secondary: rgba(255, 255, 255, 0.65);
+  --color-muted: rgba(255, 255, 255, 0.38);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-2: rgba(255, 255, 255, 0.18);
+
+  /* The five worlds — semantic, never decorative */
+  --color-cyber: #ff3b4a; /* cybersecurity      */
+  --color-ai: #5de7f5; /* AI / ML            */
+  --color-safe: #55e6a5; /* full-stack         */
+  --color-prompt: #a78bfa; /* prompt engineering */
+  --color-warn: #62a8ff; /* vibe coding        */
+
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --animate-marquee: marquee 52s linear infinite;
+  --animate-marquee-rev: marquee-rev 52s linear infinite;
+  --animate-blink: blink 1.15s steps(2, start) infinite;
+  --animate-pulse-dot: pulse-dot 2.6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.45); }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ai);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   TYPE SCALE
+   Editorial serif for cinematic moments, grotesk for everything readable,
+   monospace for anything the system itself would print.
+   ========================================================================== */
+@layer components {
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 1rem;
+    z-index: 300;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: var(--color-fg);
+    color: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* The identity reveal — the single largest type on the site. */
+  .type-identity {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.015em;
+    font-size: clamp(2.4rem, 6.4vw, 5.6rem);
+  }
+
+  /* Section headlines. */
+  .type-headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.012em;
+    font-size: clamp(2rem, 4.6vw, 3.9rem);
+  }
+
+  .type-sub {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.3rem, 2.4vw, 1.95rem);
+  }
+
+  /* Everything the system prints: labels, coordinates, status, metadata. */
+  .type-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Masked line — the entrance primitive. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+  }
+
+  /* Technical surface. One radius across the whole site: 3px, barely there.
+     Anything softer starts to look like a template of rounded cards. */
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+  }
+
+  .panel-soft {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+@utility grid-fine {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility mask-edges {
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Only the terminal carries scanlines — it is the only surface pretending to
+   be a screen inside a screen. */
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.022) 0px,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
