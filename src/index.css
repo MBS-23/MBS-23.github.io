@@ -30,6 +30,12 @@
   --color-prompt: #a78bfa; /* prompt engineering */
   --color-warn: #62a8ff; /* vibe coding        */
 
+  /* The action colour. Buttons and links only — it is never a discipline, so
+     it can be used freely without breaking what the five colours mean. */
+  --color-action: #15bcdf;
+  --color-action-hi: #3fd0ef;
+  --color-action-edge: #0fa3c2;
+
   --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
@@ -167,23 +173,117 @@
   }
 
   /* Technical surface. One radius across the whole site: 3px, barely there.
-     Anything softer starts to look like a template of rounded cards. */
+     Anything softer starts to look like a template of rounded cards.
+
+     Panels are slightly translucent so the starfield behind the page shows
+     through, and carry a 1px top highlight plus a real shadow — that is the
+     difference between a designed surface and a div with a border. */
   .panel {
-    background: var(--color-surface);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 42%),
+      color-mix(in srgb, var(--color-surface) 92%, transparent);
     border: 1px solid var(--color-border);
     border-radius: 3px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.045),
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 14px 34px -18px rgba(0, 0, 0, 0.8);
   }
 
   .panel-soft {
-    background: var(--color-surface);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent 46%),
+      color-mix(in srgb, var(--color-surface) 86%, transparent);
     border: 1px solid var(--color-border);
     border-radius: 3px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.035),
+      0 10px 28px -20px rgba(0, 0, 0, 0.75);
+  }
+
+  /* ---------- Actions ----------
+     A chamfered corner instead of a pill: it reads as machined rather than
+     decorative, and it is the one shape nothing else on the page uses. */
+  .cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 1.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #041014;
+    background: var(--color-action);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 13px) 0,
+      100% 13px,
+      100% 100%,
+      13px 100%,
+      0 calc(100% - 13px)
+    );
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-action) 35%, transparent),
+      0 12px 30px -14px color-mix(in srgb, var(--color-action-edge) 70%, transparent);
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .cta:hover {
+    background: var(--color-action-hi);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-action) 55%, transparent),
+      0 16px 38px -14px color-mix(in srgb, var(--color-action-edge) 85%, transparent);
+  }
+
+  /* Same silhouette, secondary weight. */
+  .cta-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 1.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border-2);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 13px) 0,
+      100% 13px,
+      100% 100%,
+      13px 100%,
+      0 calc(100% - 13px)
+    );
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .cta-ghost:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: color-mix(in srgb, var(--color-action) 45%, transparent);
   }
 }
 
 /* ==========================================================================
    UTILITIES
    ========================================================================== */
+
+/* Film grain. Without it, wide dark areas band on cheap panels and the page
+   reads as flat fill rather than a photographed space. */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: soft-light;
+}
 
 @utility grid-fine {
   background-image:

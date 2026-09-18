@@ -135,14 +135,14 @@ function EvidencePanel({ role }: { role: RoleTarget }) {
           <button
             type="button"
             onClick={() => openResume(resume.id)}
-            className="inline-flex items-center gap-2.5 bg-fg px-6 py-3.5 font-mono text-[0.62rem] tracking-[0.18em] text-bg uppercase transition-opacity hover:opacity-88"
+            className="cta"
           >
             Read the {resume.title.replace(' Résumé', '')} résumé
           </button>
         )}
         <a
           href={`mailto:${profile.email}?subject=${encodeURIComponent(`${role.title} — ${profile.fullName}`)}`}
-          className="inline-flex items-center gap-2.5 border border-border-2 px-6 py-3.5 font-mono text-[0.62rem] tracking-[0.18em] text-fg uppercase transition-colors hover:bg-white/5"
+          className="cta-ghost"
         >
           <Mail size={13} aria-hidden />
           Email about this role

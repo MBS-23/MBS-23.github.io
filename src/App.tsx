@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 import OriginSequence from './components/OriginSequence'
+import AmbientBackdrop from './components/AmbientBackdrop'
 import Navigation from './components/Navigation'
 import ScrollProgress from './components/ScrollProgress'
 import PortalTransition from './components/PortalTransition'
@@ -58,11 +59,13 @@ export default function App() {
         {booting && <OriginSequence lite={lite} onComplete={() => setBooting(false)} />}
       </AnimatePresence>
 
+      <AmbientBackdrop />
       <ScrollProgress />
       <PortalTransition />
       <CommandTerminal />
       <Navigation />
 
+      <div className="relative z-10">
       <main id="main">
         <Hero />
 
@@ -95,6 +98,7 @@ export default function App() {
       </main>
 
       <Outro />
+      </div>
     </>
   )
 }

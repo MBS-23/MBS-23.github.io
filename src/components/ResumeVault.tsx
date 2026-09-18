@@ -118,7 +118,7 @@ function TrackCard({ doc, onOpen, delay }: { doc: ResumeDoc; onOpen: () => void;
         <button
           type="button"
           onClick={onOpen}
-          className="mt-auto inline-flex w-full items-center justify-center gap-2.5 rounded-full border px-5 py-2.5 pt-2.5 font-mono text-[0.64rem] tracking-[0.14em] uppercase transition-colors hover:bg-white/5"
+          className="cta-ghost mt-auto w-full"
           style={{ borderColor: `color-mix(in srgb, ${colour} 45%, transparent)`, color: colour, marginTop: '1.75rem' }}
         >
           <Eye size={13} aria-hidden /> View résumé
@@ -190,7 +190,7 @@ export default function ResumeVault() {
               <button
                 type="button"
                 onClick={() => setOpen(masterResume)}
-                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-fg px-6 py-3.5 font-mono text-[0.68rem] tracking-[0.14em] uppercase text-bg transition-opacity hover:opacity-90"
+                className="cta w-full"
               >
                 <Eye size={14} aria-hidden /> View master résumé
               </button>

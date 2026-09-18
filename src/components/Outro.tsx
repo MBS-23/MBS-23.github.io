@@ -102,7 +102,7 @@ export default function Outro() {
             <div className="mt-11 flex flex-wrap items-center gap-3">
               <a
                 href={`mailto:${profile.email}?subject=Opportunity`}
-                className="group inline-flex items-center gap-3 bg-fg px-7 py-4 font-mono text-[0.64rem] tracking-[0.2em] uppercase text-bg transition-opacity hover:opacity-88"
+                className="cta"
               >
                 <Mail size={14} aria-hidden />
                 {profile.email}
@@ -110,7 +110,7 @@ export default function Outro() {
               <button
                 type="button"
                 onClick={() => navigateTo('resumes')}
-                className="border border-border-2 px-7 py-4 font-mono text-[0.64rem] tracking-[0.2em] uppercase text-fg transition-colors hover:bg-white/5"
+                className="cta-ghost"
               >
                 View résumé
               </button>

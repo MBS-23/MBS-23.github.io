@@ -139,14 +139,14 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={() => navigateTo('work')}
-                className="bg-fg px-7 py-3.5 font-mono text-[0.64rem] tracking-[0.2em] uppercase text-bg transition-opacity hover:opacity-88"
+                className="cta"
               >
                 View work
               </button>
               <button
                 type="button"
                 onClick={() => navigateTo('contact')}
-                className="border border-border-2 px-7 py-3.5 font-mono text-[0.64rem] tracking-[0.2em] uppercase text-fg transition-colors hover:bg-white/5"
+                className="cta-ghost"
               >
                 Get in touch
               </button>
