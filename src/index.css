@@ -1,4 +1,9 @@
-@import 'tailwindcss';
+/* Automatic content detection also picks up HTML that has nothing to do with
+   this app (the résumé and tracker templates that live beside it), which pulled
+   ~30 KB of unused utilities into the bundle. Scan the app, and only the app. */
+@import 'tailwindcss' source(none);
+@source '../index.html';
+@source './**/*.{ts,tsx}';
 
 /* ==========================================================================
    BALA VEERA VENKATA SUNIL — DESIGN SYSTEM
