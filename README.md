@@ -82,7 +82,7 @@ src/
 | File | Holds |
 |---|---|
 | `profile.ts` | Name, contacts, socials, education, stats |
-| `scenes.ts` | The 14-scene spine — drives nav, indicator and terminal |
+| `scenes.ts` | The 15-scene spine — drives nav, indicator and terminal |
 | `method.ts` | How I Think, delivery path, communication block |
 | `cyber.ts` | 8 security domains, AI×Security crossover, the alert-triage walkthrough |
 | `ai.ts` | AI constellation, model stack, earlier AI work |
@@ -95,6 +95,7 @@ src/
 | `credentials.ts` | Certifications, mission log, the SOC training curriculum |
 | `timeline.ts` | The story timeline and the mission statement |
 | `resumes.ts` | The four résumé documents |
+| `roles.ts` | The recruiter router: role → evidence mapping |
 | `toolIcons.ts` | **Generated.** Do not edit — run the icon script |
 
 ---
@@ -122,6 +123,51 @@ monogram automatically — that is by design, not a gap.
 **Add or reorder a scene:** `src/data/scenes.ts`, then render the component in `App.tsx`
 in the same order, and add the id to `ALL_SECTION_IDS` **and** `SCENE_OF`. The audit
 script fails the build if you forget.
+
+---
+
+## The recruiter router
+
+`src/data/roles.ts` maps each role a hiring manager might be hiring for to the evidence
+that exists for it — experience ids, project ids, skills, tools and the right résumé. The
+section renders from that file alone, so adding a role is a data edit.
+
+It is an **evidence router, not a scoring system**. There are no match percentages and no
+rankings. The only judgement is `fit`, and it has two honest values:
+
+- `direct` — hands-on experience and shipped work behind it
+- `adjacent` — real foundations, no professional depth yet (shown, not hidden)
+
+Every id in `roles.ts` must exist in `experience.ts`, `projects.ts` and `resumes.ts`; the
+type system and the link audit keep that true. "Read the … résumé" fires `openResume(id)`,
+which the vault listens for, so the router opens the exact document rather than dropping
+the visitor in a grid.
+
+---
+
+## Credentials are four different claims
+
+`credentials.ts` labels every entry with a `kind`, and the section groups by it:
+
+| kind | means |
+|---|---|
+| `certification` | an exam actually passed, with issuer and validity |
+| `training` | a structured programme completed — training, not employment |
+| `programme` | an internship or government programme certificate |
+| `recognition` | awarded for performance, not attendance |
+
+Letters live in their own `letters` array. This separation is the reason the site can never
+imply an exam was passed when a course was attended — CEH v13 in particular is a training
+track.
+
+---
+
+## Numbers carry their source
+
+Any project with `results` also carries `resultsSource`, rendered directly beneath the
+figures. OmniAI Cloud's accuracy and latency numbers are labelled as evaluation results
+reported in the project paper on curated test sets — not production telemetry. Never add a
+metric without saying where it came from.
 
 ---
 
@@ -174,7 +220,7 @@ viewer has no download control by design.
   monograms.
 - Animation pauses off-screen and under reduced motion.
 
-Current build: `index` ~148 KB gzip, `motion` ~48 KB, `three` ~130 KB (lazy), CSS ~9 KB.
+Current build: `index` ~152 KB gzip, `motion` ~48 KB, `three` ~130 KB (lazy), CSS ~9 KB.
 
 ---
 

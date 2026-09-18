@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Eye, FileText, Star, X } from 'lucide-react'
-import { masterResume, resumeHref, resumeNote, trackResumes, type ResumeDoc } from '../data/resumes'
+import { allResumes, masterResume, resumeHref, resumeNote, trackResumes, type ResumeDoc } from '../data/resumes'
+import { RESUME_EVENT } from '../lib/navigate'
 import { ENERGY, Reveal, Section, SectionHeader } from './ui'
 
 /**
@@ -129,6 +130,18 @@ function TrackCard({ doc, onOpen, delay }: { doc: ResumeDoc; onOpen: () => void;
 
 export default function ResumeVault() {
   const [open, setOpen] = useState<ResumeDoc | null>(null)
+
+  // The recruiter router points at a specific résumé; open that one directly
+  // rather than making the visitor find it again in the grid.
+  useEffect(() => {
+    const onRequest = (e: Event) => {
+      const id = (e as CustomEvent<{ id: string }>).detail?.id
+      const doc = allResumes.find((d) => d.id === id)
+      if (doc) setOpen(doc)
+    }
+    window.addEventListener(RESUME_EVENT, onRequest)
+    return () => window.removeEventListener(RESUME_EVENT, onRequest)
+  }, [])
 
   return (
     <Section id="resumes" className="py-24 sm:py-32" tone="cyber">

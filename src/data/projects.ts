@@ -24,6 +24,8 @@ export interface Project {
   technologies: string[]
   features: string[]
   results?: { value: string; label: string }[]
+  /** Where the numbers above come from. Shown wherever results are shown. */
+  resultsSource?: string
   security?: string
   testing?: string
   limitations?: string
@@ -86,7 +88,7 @@ export const projects: Project[] = [
       'Generic label correction: ResNet50 overrides coarse COCO labels from YOLO',
       'Multi-language support with automatic detection and translation',
       'Document intelligence — PDF extraction, OCR fallback, summarisation',
-      'Explainability engine reporting selected modules and correction reasons',
+      'Routing-level explainability: which modules ran, and why each was selected',
       'Startup pre-initialisation of heavy models to remove cold-start latency',
     ],
     results: [
@@ -94,6 +96,8 @@ export const projects: Project[] = [
       { value: '86s → 1.8s', label: 'First-request latency after startup pre-initialisation' },
       { value: '−76%', label: 'Unnecessary model execution removed by intelligent routing' },
     ],
+    resultsSource:
+      'Evaluation results reported in the project paper, measured on curated test sets — not production telemetry.',
     testing:
       'Evaluated on curated multi-modal datasets — 100 wildlife images across 30+ species, 50 text and scanned PDFs, and 200 multilingual text samples — against YOLOv8n, YOLOv8x, ResNet50 and a voting-ensemble baseline.',
     limitations:
@@ -145,6 +149,7 @@ export const projects: Project[] = [
       { value: '4', label: 'Scan modes — TCP, UDP, Stealth/SYN, Version' },
       { value: '3', label: 'One-click report formats' },
     ],
+    resultsSource: 'Feature counts from the delivered application, not performance benchmarks.',
     security:
       'Designed for educational use and authorised security testing only. Every demonstration runs against lab environments or targets with explicit permission.',
     limitations:
@@ -265,6 +270,7 @@ export const projects: Project[] = [
       { value: '50+', label: 'Students trained in secure vs. insecure development' },
       { value: '12+', label: 'Security labs designed and shipped' },
     ],
+    resultsSource: 'Counts from the Skills Uprise Spectranox programme.',
     security: 'Educational lab environment. All targets are intentionally vulnerable training applications.',
     learned:
       'Teaching an attack forces you to understand it properly. Explaining why a payload works to 50 people exposes every gap in your own understanding, fast.',

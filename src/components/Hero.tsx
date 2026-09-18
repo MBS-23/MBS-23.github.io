@@ -20,9 +20,14 @@ const DISCIPLINES = [
   { label: 'FULL-STACK', colour: 'var(--color-safe)' },
 ]
 
+/** The supporting disciplines, in descending weight. */
 const SECONDARY = [
+  { label: 'APPLICATION SECURITY', colour: 'var(--color-cyber)' },
+  { label: 'SOC', colour: 'var(--color-safe)' },
+  { label: 'AI SECURITY', colour: 'var(--color-ai)' },
+  { label: 'GENAI', colour: 'var(--color-ai)' },
   { label: 'PROMPT ENGINEERING', colour: 'var(--color-prompt)' },
-  { label: 'VIBE CODING', colour: 'var(--color-warn)' },
+  { label: 'AI-ASSISTED DEVELOPMENT', colour: 'var(--color-warn)' },
 ]
 
 export default function Hero() {
@@ -106,7 +111,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Disciplines — secondary */}
-            <motion.p {...rise(0.58)} className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <motion.p {...rise(0.58)} className="mt-3.5 flex max-w-2xl flex-wrap items-center gap-x-3 gap-y-1.5">
               {SECONDARY.map((d, i) => (
                 <span key={d.label} className="flex items-center gap-3">
                   <span className="font-mono text-[0.6rem] tracking-[0.2em]" style={{ color: d.colour }}>
@@ -121,9 +126,12 @@ export default function Hero() {
               ))}
             </motion.p>
 
-            {/* Positioning */}
-            <motion.p {...rise(0.66)} className="mt-9 max-w-xl text-[0.96rem] leading-relaxed text-secondary">
+            {/* Positioning — the one sentence, then the qualifier */}
+            <motion.p {...rise(0.66)} className="mt-9 max-w-2xl text-[1.12rem] leading-snug text-fg sm:text-[1.28rem]">
               {profile.positioning}
+            </motion.p>
+            <motion.p {...rise(0.72)} className="mt-4 max-w-xl text-[0.94rem] leading-relaxed text-secondary">
+              {profile.positioningDetail}
             </motion.p>
 
             {/* Actions */}

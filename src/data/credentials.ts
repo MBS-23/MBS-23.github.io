@@ -3,10 +3,25 @@
  * Nothing here is invented — no certificate numbers, no fabricated issuers.
  */
 
+/**
+ * A certification, a training programme, an internship certificate and a
+ * recognition are four different claims. They are labelled separately here so
+ * the site can never imply an exam was passed when a course was attended.
+ */
+export type CredentialKind = 'certification' | 'training' | 'programme' | 'recognition'
+
+export const CREDENTIAL_GROUPS: { kind: CredentialKind; label: string; note: string }[] = [
+  { kind: 'certification', label: 'Certifications', note: 'Passed exams with an issuer and a validity date' },
+  { kind: 'training', label: 'Training programmes', note: 'Structured courses completed — training, not employment' },
+  { kind: 'programme', label: 'Programme certificates', note: 'Internships and government programmes completed' },
+  { kind: 'recognition', label: 'Recognition', note: 'Awarded for performance, not attendance' },
+]
+
 export interface Certification {
   title: string
   issuer: string
   meta: string | null
+  kind: CredentialKind
   energy: 'cyber' | 'ai' | 'safe' | 'warn' | 'prompt'
 }
 
@@ -15,51 +30,78 @@ export const certifications: Certification[] = [
     title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
     issuer: 'Oracle',
     meta: 'Valid until 30 October 2027',
+    kind: 'certification',
     energy: 'ai',
   },
   {
     title: 'Oracle AI Vector Search Certified Professional',
     issuer: 'Oracle',
     meta: 'Valid until 30 October 2027',
+    kind: 'certification',
     energy: 'ai',
   },
   {
     title: 'CEH V13 Track — Ethical Hacking & Cyber Security Specialisation',
     issuer: 'Skills Uprise',
     meta: 'Six-month programme · from January 2026',
+    kind: 'training',
     energy: 'cyber',
   },
   {
     title: 'SOC with AI — L2 / L3',
     issuer: 'CyberGuide Telugu',
     meta: '22 Apr 2026 — 30 Jun 2026',
+    kind: 'training',
     energy: 'safe',
   },
   {
     title: 'Certificate of Internship — GenAI',
     issuer: 'Huebits Tech Pvt. Ltd.',
     meta: '01 Jan — 31 Mar 2026 · certificate available on request',
+    kind: 'programme',
     energy: 'ai',
   },
   {
     title: 'Certificate of Excellence — Ethical Hacking & Cyber Security Workshop',
     issuer: 'Supraja Technologies',
     meta: 'Level 1 · top performer among ~120 participants',
+    kind: 'recognition',
     energy: 'cyber',
   },
   {
     title: 'Certificate of Appreciation — “THE FAST-TRACK: The Sitean Show”',
     issuer: 'SASI Institute of Technology and Engineering',
     meta: null,
+    kind: 'recognition',
     energy: 'warn',
   },
   {
     title: 'Cyber Security Police Internship',
     issuer: 'Amroha Police (Government)',
     meta: '11 — 21 June 2026',
+    kind: 'programme',
     energy: 'cyber',
   },
 ]
+
+/** Letters issued by an organisation — the hardest evidence there is. */
+export const letters = [
+  {
+    title: 'Letter of Recommendation — placement',
+    issuer: 'Supraja Technologies',
+    detail: 'Issued after the Web Application VAPT internship.',
+  },
+  {
+    title: 'Letter of Recommendation — higher studies',
+    issuer: 'Supraja Technologies',
+    detail: 'Issued alongside the placement recommendation.',
+  },
+  {
+    title: 'Reference and completion letter',
+    issuer: 'Cothon Solutions (AICTE-approved)',
+    detail: 'Confirms completion of the AI/ML internship and full settlement.',
+  },
+] as const
 
 export interface Achievement {
   title: string

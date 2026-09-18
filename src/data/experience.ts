@@ -130,7 +130,7 @@ export const experience: Role[] = [
     id: 'aimer-dl',
     org: 'AIMER Society',
     title: 'AI & Deep Learning Intern',
-    period: '15 May 2025 — 2026',
+    period: 'From 15 May 2025',
     mode: 'Online',
     track: 'ai',
     points: [

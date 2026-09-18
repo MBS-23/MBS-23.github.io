@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Award, BadgeCheck, ChevronDown } from 'lucide-react'
-import { achievements, certifications, knowledgeCore } from '../data/credentials'
+import { Award, BadgeCheck, ChevronDown, FileText } from 'lucide-react'
+import { CREDENTIAL_GROUPS, achievements, certifications, knowledgeCore, letters } from '../data/credentials'
 import { ENERGY, Reveal, Section, SectionHeader } from './ui'
 
 /**
@@ -13,54 +13,75 @@ export default function Credentials() {
   return (
     <Section id="credentials" className="py-24 sm:py-32" tone="warn">
       <SectionHeader
-        n="13"
+        n="14"
         eyebrow="Credentials"
         title="Verified"
-        lead="Certifications that are current, recognition that came from work rather than attendance, and the full training curriculum behind the SOC half of the profile."
+        lead="Four different kinds of claim, kept apart on purpose: exams actually passed, training programmes completed, internship certificates, and recognition earned for performance. Then the letters, and the curriculum behind the SOC half of the profile."
         tone="warn"
       />
 
-      {/* ---------- Certificate wall ---------- */}
-      <div className="mt-14">
-        <p className="type-mono mb-5 flex items-center gap-2.5">
-          <BadgeCheck size={13} aria-hidden className="text-ai" />
-          Certifications & programmes
-          <span className="text-muted/60">({certifications.length})</span>
-        </p>
+      {/* ---------- Credentials, grouped by what they actually are ---------- */}
+      {CREDENTIAL_GROUPS.map((group, gi) => {
+        const items = certifications.filter((c) => c.kind === group.kind)
+        if (!items.length) return null
+        return (
+          <div key={group.kind} className={gi === 0 ? 'mt-14' : 'mt-14'}>
+            <p className="type-mono flex items-center gap-2.5">
+              <BadgeCheck size={13} aria-hidden className="text-ai" />
+              {group.label}
+              <span className="text-muted/60">({items.length})</span>
+            </p>
+            <p className="mt-2 mb-5 text-[0.82rem] text-muted">{group.note}</p>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {certifications.map((c, i) => {
-            const colour = ENERGY[c.energy]
-            return (
-              <Reveal key={c.title} delay={Math.min(i, 8) * 0.035}>
-                <article
-                  className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-5 transition-colors duration-200 hover:border-border-2"
-                  style={{ color: colour }}
-                >
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{
-                      background: `radial-gradient(90% 70% at 50% 0%, color-mix(in srgb, ${colour} 18%, transparent), transparent 70%)`,
-                    }}
-                  />
-                  <div className="relative">
-                    <span
-                      className="inline-block h-1 w-10 rounded-full"
-                      style={{ background: colour }}
-                      aria-hidden
-                    />
-                    <h3 className="mt-4 text-[0.92rem] font-medium leading-snug text-fg">{c.title}</h3>
-                    <p className="mt-3 text-[0.8rem] text-secondary">{c.issuer}</p>
-                    {c.meta && (
-                      <p className="mt-1.5 font-mono text-[0.6rem] tracking-wide text-muted">{c.meta}</p>
-                    )}
-                  </div>
-                </article>
-              </Reveal>
-            )
-          })}
-        </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {items.map((c, i) => {
+                const colour = ENERGY[c.energy]
+                return (
+                  <Reveal key={c.title} delay={Math.min(i, 8) * 0.035}>
+                    <article
+                      className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-5 transition-colors duration-200 hover:border-border-2"
+                      style={{ color: colour }}
+                    >
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        style={{
+                          background: `radial-gradient(90% 70% at 50% 0%, color-mix(in srgb, ${colour} 18%, transparent), transparent 70%)`,
+                        }}
+                      />
+                      <div className="relative">
+                        <span className="inline-block h-1 w-10 rounded-full" style={{ background: colour }} aria-hidden />
+                        <h3 className="mt-4 text-[0.92rem] leading-snug font-medium text-fg">{c.title}</h3>
+                        <p className="mt-3 text-[0.8rem] text-secondary">{c.issuer}</p>
+                        {c.meta && <p className="mt-1.5 font-mono text-[0.6rem] tracking-wide text-muted">{c.meta}</p>}
+                      </div>
+                    </article>
+                  </Reveal>
+                )
+              })}
+            </div>
+          </div>
+        )
+      })}
+
+      {/* ---------- Letters ---------- */}
+      <div className="mt-14">
+        <p className="type-mono flex items-center gap-2.5">
+          <FileText size={13} aria-hidden className="text-safe" />
+          Letters
+          <span className="text-muted/60">({letters.length})</span>
+        </p>
+        <p className="mt-2 mb-5 text-[0.82rem] text-muted">Written by the organisation, on their letterhead</p>
+
+        <ul className="grid gap-px border border-border bg-border sm:grid-cols-3">
+          {letters.map((l) => (
+            <li key={l.title} className="bg-surface px-5 py-5">
+              <h3 className="text-[0.92rem] leading-snug text-fg">{l.title}</h3>
+              <p className="mt-2 font-mono text-[0.58rem] tracking-[0.14em] text-muted uppercase">{l.issuer}</p>
+              <p className="mt-3 text-[0.82rem] leading-relaxed text-secondary">{l.detail}</p>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* ---------- Mission log ---------- */}

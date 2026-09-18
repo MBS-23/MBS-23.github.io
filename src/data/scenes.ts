@@ -25,10 +25,11 @@ export const scenes: Scene[] = [
   { id: 'vibe', n: '08', label: 'VIBE CODING', primary: false },
   { id: 'skills', n: '09', label: 'SYSTEMS', primary: true },
   { id: 'work', n: '10', label: 'PROJECTS', primary: true },
-  { id: 'current', n: '11', label: 'CURRENTLY BUILDING', primary: true },
-  { id: 'experience', n: '12', label: 'EXPERIENCE', primary: true },
-  { id: 'credentials', n: '13', label: 'CREDENTIALS', primary: false },
-  { id: 'contact', n: '14', label: 'CONTACT', primary: false },
+  { id: 'hiring', n: '11', label: 'FOR RECRUITERS', primary: true },
+  { id: 'current', n: '12', label: 'CURRENTLY BUILDING', primary: false },
+  { id: 'experience', n: '13', label: 'EXPERIENCE', primary: true },
+  { id: 'credentials', n: '14', label: 'CREDENTIALS', primary: false },
+  { id: 'contact', n: '15', label: 'CONTACT', primary: false },
 ]
 
 export const TOTAL = scenes.length
@@ -49,6 +50,7 @@ export const ALL_SECTION_IDS = [
   'skills',
   'tools',
   'work',
+  'hiring',
   'current',
   'experience',
   'trainer',
@@ -74,6 +76,7 @@ export const SCENE_OF: Record<string, string> = {
   skills: 'skills',
   tools: 'skills',
   work: 'work',
+  hiring: 'hiring',
   current: 'current',
   experience: 'experience',
   trainer: 'experience',

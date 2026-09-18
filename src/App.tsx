@@ -20,6 +20,7 @@ import PromptEngineering from './components/PromptEngineering'
 import VibeCodingLab from './components/VibeCodingLab'
 import { SkillsSection, ToolsSection } from './components/SkillsAndTools'
 import ProjectStack from './components/ProjectStack'
+import RoleRouter from './components/RoleRouter'
 import CurrentWork from './components/CurrentWork'
 import { ExperienceTimeline, TrainerSection } from './components/ExperienceTimeline'
 import Credentials from './components/Credentials'
@@ -83,6 +84,7 @@ export default function App() {
         <ToolsSection />
 
         <ProjectStack />
+        <RoleRouter />
         <CurrentWork />
 
         <ExperienceTimeline />

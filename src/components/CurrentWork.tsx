@@ -29,7 +29,7 @@ export default function CurrentWork() {
   return (
     <Section id="current" className="py-24 sm:py-32" tone="prompt">
       <SectionHeader
-        n="11"
+        n="12"
         eyebrow="Currently building"
         title="In Development"
         lead="The portfolio is not the end of the journey. These are the systems being explored, designed, built and tested right now — labelled honestly, none of them presented as finished."

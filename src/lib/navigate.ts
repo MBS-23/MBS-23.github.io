@@ -10,6 +10,7 @@
 
 export const NAV_EVENT = 'bvvs:navigate'
 export const TERMINAL_EVENT = 'bvvs:terminal'
+export const RESUME_EVENT = 'bvvs:resume'
 
 export interface NavDetail {
   /** Target section id, without the leading hash. */
@@ -37,6 +38,7 @@ const READOUTS: Record<string, string> = {
   trainer: 'OPENING KNOWLEDGE TRANSFER',
   soc: 'CONNECTING TO SOC — SIMULATION',
   work: 'PROJECT DATABASE ONLINE',
+  hiring: 'MATCHING ROLE TO EVIDENCE',
   current: 'READING DEVELOPMENT BOARD',
   credentials: 'VERIFYING CREDENTIALS',
   resumes: 'OPENING RÉSUMÉ VAULT',
@@ -62,6 +64,12 @@ export function scrollToSection(target: string) {
   if (!el) return
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+}
+
+/** Open one résumé in the vault viewer, from anywhere on the page. */
+export function openResume(id: string) {
+  navigateTo('resumes')
+  window.dispatchEvent(new CustomEvent<{ id: string }>(RESUME_EVENT, { detail: { id } }))
 }
 
 /** Open or close the command terminal. */

@@ -170,17 +170,24 @@ function ProjectScene({ project, index }: { project: Project; index: number }) {
         <div className={`lg:col-span-5 ${flip ? 'lg:order-1' : ''}`}>
           <Reveal delay={0.1}>
             <div className="space-y-8 lg:sticky lg:top-24">
-              {/* results */}
+              {/* results — always with the source of the numbers */}
               {project.results && (
-                <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-1">
-                  {project.results.map((r) => (
-                    <div key={r.label} className="bg-surface px-4 py-4">
-                      <p className="font-mono text-[1.18rem] leading-none tracking-tight" style={{ color: colour }}>
-                        {r.value}
-                      </p>
-                      <p className="mt-2 text-[0.78rem] leading-snug text-muted">{r.label}</p>
-                    </div>
-                  ))}
+                <div>
+                  <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-1">
+                    {project.results.map((r) => (
+                      <div key={r.label} className="bg-surface px-4 py-4">
+                        <p className="font-mono text-[1.18rem] leading-none tracking-tight" style={{ color: colour }}>
+                          {r.value}
+                        </p>
+                        <p className="mt-2 text-[0.78rem] leading-snug text-muted">{r.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {project.resultsSource && (
+                    <p className="mt-3 font-mono text-[0.56rem] leading-relaxed tracking-[0.06em] text-muted">
+                      {project.resultsSource}
+                    </p>
+                  )}
                 </div>
               )}
 

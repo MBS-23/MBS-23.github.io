@@ -17,8 +17,10 @@ export const profile = {
   /** Two lines for the masked title reveal. */
   nameLines: ['BALA VEERA', 'VENKATA SUNIL'] as const,
   identity: 'CYBERSECURITY × AI/ML',
-  positioning:
-    'I build software, understand how applications work, understand how they can fail from a security perspective, explore how AI can make systems more intelligent, and use AI-assisted development workflows to rapidly turn ideas into working products.',
+  /** The one sentence. Everything else on the site is evidence for it. */
+  positioning: 'I build, test and secure software systems — using AI where it creates leverage.',
+  positioningDetail:
+    'Security is the foundation. AI and software engineering are the systems I build around it — applications that work, tested the way an attacker would test them.',
   status: 'AVAILABLE FOR OPPORTUNITIES · IMMEDIATE JOINER',
   graduating: 'B.Tech AI & ML · 2026',
   location: 'Tanuku, Andhra Pradesh, India',

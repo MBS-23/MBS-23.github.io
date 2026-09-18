@@ -12,7 +12,7 @@ export function ExperienceTimeline() {
   return (
     <Section id="experience" className="py-24 sm:py-32" tone="cyber">
       <SectionHeader
-        n="12"
+        n="13"
         eyebrow="Service record"
         title="Experience"
         lead="Seven internships and one paid role across two years — several of them running in parallel, all of them hands-on."

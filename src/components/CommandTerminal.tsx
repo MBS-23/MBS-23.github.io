@@ -48,6 +48,7 @@ const COMMANDS: Command[] = [
   { name: 'skills', aliases: ['bvvsskills'], summary: 'Skills matrix', target: 'skills' },
   { name: 'tools', aliases: ['bvvstools'], summary: 'Toolchain', target: 'tools' },
   { name: 'projects', aliases: ['work', 'bvvsprojects'], summary: 'Completed projects', target: 'work' },
+  { name: 'hiring', aliases: ['recruiter', 'roles', 'match'], summary: 'Find your suitable candidate', target: 'hiring' },
   { name: 'building', aliases: ['current', 'bvvscurrent'], summary: 'Currently building', target: 'current' },
   { name: 'experience', aliases: ['bvvsexperience'], summary: 'Internships and roles', target: 'experience' },
   { name: 'training', aliases: ['trainer'], summary: 'Knowledge transfer', target: 'trainer' },

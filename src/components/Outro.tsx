@@ -8,7 +8,7 @@ import { Reveal, Section, SectionHeader } from './ui'
 import { navigateTo } from '../lib/navigate'
 
 /**
- * SCENE 14 — CONTACT.
+ * SCENE 15 — CONTACT.
  *
  * The closing is deliberately plain: a headline, an address, and the four ways
  * to reach him. Nothing competes with the call to action.
@@ -84,7 +84,7 @@ export default function Outro() {
         <div className="relative mx-auto w-full max-w-[1440px] px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
           <Reveal>
             <p className="flex items-center gap-3 font-mono text-[0.58rem] tracking-[0.24em] uppercase">
-              <span className="text-cyber">14</span>
+              <span className="text-cyber">15</span>
               <span aria-hidden className="h-px w-6 bg-cyber/45" />
               <span className="text-muted">Contact</span>
             </p>
