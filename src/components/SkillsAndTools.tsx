@@ -17,7 +17,7 @@ const ICONS = { Code2, Layers, BrainCircuit, Database, Binary, ShieldHalf }
 function SkillCard({ glyph, name, applied, colour }: { glyph: string; name: string; applied: string; colour: string }) {
   return (
     <div
-      className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-4 transition-transform duration-200 hover:-translate-y-0.5"
+      className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-4 transition-colors duration-200 hover:border-border-2"
       style={{ color: colour }}
     >
       <div
@@ -145,7 +145,7 @@ export function ToolsSection() {
           return (
             <Reveal key={t.name} delay={Math.min(i, 12) * 0.02}>
               <div
-                className="group flex h-full items-center gap-3 rounded-[3px] border border-border bg-surface p-3 transition-all duration-200 hover:-translate-y-0.5"
+                className="group flex h-full items-center gap-3 rounded-[3px] border border-border bg-surface p-3 transition-colors duration-200 hover:border-border-2"
                 style={{ borderColor: undefined }}
               >
                 <span

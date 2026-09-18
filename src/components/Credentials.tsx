@@ -34,7 +34,7 @@ export default function Credentials() {
             return (
               <Reveal key={c.title} delay={Math.min(i, 8) * 0.035}>
                 <article
-                  className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-5 transition-transform duration-300 hover:-translate-y-1 hover:rotate-[-0.6deg]"
+                  className="panel-soft group relative h-full overflow-hidden rounded-[3px] p-5 transition-colors duration-200 hover:border-border-2"
                   style={{ color: colour }}
                 >
                   <div
