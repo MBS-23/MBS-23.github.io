@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { aiConstellation, aiHistory, aiStack } from '../data/ai'
 import { Reveal, Section, SectionHeader } from './ui'
@@ -10,6 +10,20 @@ import { Reveal, Section, SectionHeader } from './ui'
  */
 export default function AIUniverse() {
   const [active, setActive] = useState<string | null>(null)
+
+  // The node labels sit on the orbit and are wider than the gap they need, so
+  // on a 320px screen the outer ring has to come in or the page scrolls
+  // sideways. Radii are shared by the rings, the connectors and the nodes.
+  const [narrow, setNarrow] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)')
+    const sync = () => setNarrow(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+  const R1 = narrow ? 19 : 26
+  const R2 = narrow ? 30 : 43
   const selected = aiConstellation.find((n) => n.id === active)
 
   return (
@@ -27,14 +41,22 @@ export default function AIUniverse() {
         <div className="lg:col-span-7">
           <div className="relative mx-auto aspect-square w-full max-w-[520px]">
             {/* Rings */}
-            <span className="absolute left-1/2 top-1/2 h-[52%] w-[52%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-ai/20" aria-hidden />
-            <span className="absolute left-1/2 top-1/2 h-[86%] w-[86%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-ai/12" aria-hidden />
+            <span
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ai/20"
+              style={{ width: `${R1 * 2}%`, height: `${R1 * 2}%` }}
+              aria-hidden
+            />
+            <span
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ai/12"
+              style={{ width: `${R2 * 2}%`, height: `${R2 * 2}%` }}
+              aria-hidden
+            />
 
             {/* Connectors */}
             <svg className="absolute inset-0 h-full w-full" aria-hidden>
               {aiConstellation.map((n) => {
                 const rad = (n.angle * Math.PI) / 180
-                const r = n.ring === 1 ? 26 : 43
+                const r = n.ring === 1 ? R1 : R2
                 const dim = active !== null && active !== n.id
                 return (
                   <line
@@ -62,7 +84,7 @@ export default function AIUniverse() {
             {/* Nodes */}
             {aiConstellation.map((n) => {
               const rad = (n.angle * Math.PI) / 180
-              const r = n.ring === 1 ? 26 : 43
+              const r = n.ring === 1 ? R1 : R2
               const isActive = active === n.id
               const dim = active !== null && !isActive
               return (

@@ -106,8 +106,10 @@ export function TrainerSection() {
       <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <Reveal>
-            <div className="panel-soft rounded-[3px] p-8 text-center" style={{ color: 'var(--color-safe)' }}>
-              <p className="text-5xl font-semibold tracking-tight text-fg sm:text-6xl">
+            <div className="panel-soft rounded-[3px] p-6 text-center sm:p-8" style={{ color: 'var(--color-safe)' }}>
+              {/* "STUDENTS" is 250px wide at text-5xl, which overflows a 320px
+                  screen on its own. The display size starts smaller. */}
+              <p className="text-[1.75rem] font-semibold tracking-tight text-fg sm:text-5xl md:text-6xl">
                 {trainer.headline}
               </p>
               <p className="mt-3 text-sm text-secondary">{trainer.subject}</p>

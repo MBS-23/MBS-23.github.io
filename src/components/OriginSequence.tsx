@@ -336,7 +336,8 @@ export default function OriginSequence({ onComplete, lite = false }: { onComplet
                   {profile.surname.toUpperCase()}
                 </motion.p>
 
-                <h1 className="type-identity mt-2 text-fg">
+                {/* Not an h1: the document's heading is the hero's. */}
+                <p className="type-identity mt-2 text-fg">
                   {profile.nameLines.map((line, i) => (
                     <span key={line} className="mask-line">
                       <motion.span
@@ -349,7 +350,7 @@ export default function OriginSequence({ onComplete, lite = false }: { onComplet
                       </motion.span>
                     </span>
                   ))}
-                </h1>
+                </p>
 
                 <motion.div
                   className="mx-auto mt-7 h-px w-24 origin-center bg-cyber"

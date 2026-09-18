@@ -121,6 +121,18 @@ export const roleTargets: RoleTarget[] = [
     resume: 'track-security',
   },
   {
+    id: 'security-engineer',
+    family: 'security',
+    title: 'Security Engineer',
+    fit: 'adjacent',
+    why: 'Security tooling has been built and shipped — a scanner, a detection pipeline, live SOC dashboards — but as internship and training work, not yet as an engineer inside a production security team.',
+    experience: ['skillsuprise', 'supraja-advanced', 'cyberguide'],
+    projects: ['shadowportx', 'idsips'],
+    skills: ['Detection Engineering', 'Secure Code Review', 'Python', 'Log Analysis'],
+    tools: ['Splunk', 'Microsoft Sentinel', 'Wazuh', 'Snort', 'Git / GitHub'],
+    resume: 'track-security',
+  },
+  {
     id: 'ai-security',
     family: 'security',
     title: 'AI Security',

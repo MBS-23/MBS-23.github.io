@@ -188,6 +188,8 @@ export const tools: ToolItem[] = [
   { name: 'Oracle Cloud', glyph: 'OCI', energy: 'prompt', category: 'Cloud' },
   { name: 'PowerShell', glyph: 'PWS', energy: 'prompt', category: 'Scripting' },
   { name: 'Postman', glyph: 'PM', energy: 'prompt', category: 'API Testing' },
+  { name: 'Claude', glyph: 'CL', energy: 'prompt', category: 'AI-Assisted Dev' },
+  { name: 'ChatGPT', glyph: 'GPT', energy: 'prompt', category: 'AI-Assisted Dev' },
   { name: 'Canva', glyph: 'CV2', energy: 'prompt', category: 'Design' },
 ]
 
