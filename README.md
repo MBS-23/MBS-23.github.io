@@ -7,35 +7,6 @@ as supporting skills.
 
 Live: **https://mbs-23.github.io/**
 
----
-
-## Quick start
-
-```bash
-npm install
-npm run dev      # http://localhost:5180
-npm run build    # production build to dist/
-npm run preview  # serve the production build locally
-npm run lint     # type-check only (tsc --noEmit)
-```
-
-Node 18+ required (CI uses Node 20).
-
-### The two checks that matter
-
-```bash
-npm run lint                  # types
-node scripts/audit-links.mjs  # every anchor, scene and external link resolves
-```
-
-Both run in CI on every push; a broken in-page link fails the build rather than
-shipping silently.
-
----
-
-## What is real here
-
-Nothing on this site is a stock graphic or a borrowed asset.
 
 | Thing | Source | Licence |
 |---|---|---|
