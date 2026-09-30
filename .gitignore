@@ -25,6 +25,10 @@
 !/src/
 !/scripts/
 
+# SecureLens AI — an independent project kept in its own directory. It has its
+# own build, dependencies and CI and is not part of the portfolio site build.
+!/securelens-ai/
+
 # Never, under any circumstances
 node_modules/
 dist/
